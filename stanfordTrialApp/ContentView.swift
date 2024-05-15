@@ -11,10 +11,10 @@ import CoreData
 struct ContentView: View {
     var body: some View{
         HStack{
-            CardView(isFaceUp: true)
-            CardView()
-            CardView()
-            CardView()
+            let emojis = ["👻", "🎃" , "🕷️", "🤡", "☠️"]
+            ForEach(emojis.indices, id: \.self)
+            { index in CardView(content: emojis[index], isFaceUp: true)
+                     }
         }
         .foregroundColor(.orange)
         .padding()
@@ -23,7 +23,10 @@ struct ContentView: View {
 }
 
 struct CardView: View{
+  
+    let content :String
     @State var isFaceUp = false
+   
     var base  =  RoundedRectangle(cornerRadius: 22)
     var body: some View{
         ZStack{
@@ -31,7 +34,7 @@ struct CardView: View{
             {
                 base.foregroundColor(.white)
                 base.strokeBorder(lineWidth: 2)
-        Text("👻")
+                Text(content).font(.largeTitle)
     }
 else
         {
